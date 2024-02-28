@@ -2,5 +2,5 @@
  simple auto click python script made using dearpygui (imgui) with a config / hotkey system.
 
 # TODO
-Click randomizer (min/max range) [ ]  
-
+- [ ] Click randomizer (min/max range).
+- [ ] maybe some other features.
