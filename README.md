@@ -1,0 +1,2 @@
+# elterpy
+ auto clicker
