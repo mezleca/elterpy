@@ -105,13 +105,18 @@ def initialize():
     app["thread"].start()
 
 gui.create_context()
-gui.create_viewport(title="elterpy", width=800, height=600, min_width=800, max_height=600)
+gui.create_viewport(title="elterpy", width=600, height=350, min_width=600, max_height=350, resizable=False)
 gui.setup_dearpygui()
 gui.set_exit_callback(yep)
 
-with gui.window(label="elterpy", max_size=(800, 600), min_size=(800, 600), no_resize=True, no_title_bar=True, no_move=True):
+with gui.font_registry():
+    main_font = gui.add_font(file="./fonts/jb.ttf", size=16)
+
+with gui.window(label="elterpy", max_size=(600, 350), min_size=(600, 350), no_resize=True, no_title_bar=True, no_move=True):
     
     with gui.tab_bar():
+
+        gui.bind_font(main_font)
 
         # options tab
         with gui.tab(label="main"):
@@ -128,6 +133,19 @@ with gui.window(label="elterpy", max_size=(800, 600), min_size=(800, 600), no_re
         with gui.tab(label="config"):
             gui.add_button(label="save config", callback=update_config)
             gui.add_button(label="load config", callback=load_config)
+
+with gui.theme() as theme:
+    with gui.theme_component(gui.mvAll):
+
+        gui.add_theme_color(gui.mvThemeCol_WindowBg, (16, 16, 16))
+        
+        gui.add_theme_style(gui.mvStyleVar_FramePadding, 4, 6)
+        gui.add_theme_style(gui.mvStyleVar_TabRounding, 0.65)
+        gui.add_theme_style(gui.mvStyleVar_WindowBorderSize, 0, 0)
+        gui.add_theme_style(gui.mvStyleVar_Alpha, 0.85)
+        gui.add_theme_style(gui.mvStyleVar_FrameRounding, 1)
+    
+gui.bind_theme(theme=theme)
         
 gui.show_viewport()
 gui.start_dearpygui()
