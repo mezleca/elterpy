@@ -8,6 +8,7 @@
 # TODO
 - [ ] Click Randomizer (min/max range)
 - [ ] Target key Selector (Left Click, Right Click, etc...)
+- [ ] Design improvement ( New colors, size, etc )
 
 # Maybe
 - [ ] Multiple Keys Selection (XBUTTON2=Left Click, XBUTTON1=Right Click, etc...)
