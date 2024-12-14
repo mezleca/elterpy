@@ -14,8 +14,7 @@
 # TODO
 - [ ] Rework hotkey system
 - [ ] Click Randomizer (min/max range)
-- [ ] Target key Selector (Left Click, Right Click, etc...)
+- [ ] Support for Linux (get rid of win32api).
+- [X] Target key Selector (Left Click, Right Click, etc...)
 - [x] Design improvement ( New colors, size, etc )
-
-# Maybe
 - [ ] Multiple Keys Selection (XBUTTON2=Left Click, XBUTTON1=Right Click, etc...)

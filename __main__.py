@@ -20,10 +20,16 @@ buttons = {
     "XBUTTON2": "0x06"
 }
 
+target_buttons = {
+    "mouse1": win32con.MOUSEEVENTF_LEFTDOWN,
+    "mouse2": win32con.MOUSEEVENTF_RIGHTDOWN
+}
+
 config = {
     "key": buttons.get("XBUTTON2"), # default key
     "cps": 12,
     "random": False,
+    "target": "mouse1" # default target button
 }
 
 def update_config():
@@ -48,10 +54,7 @@ else:
     create_config()
 
 hotkeys = list(buttons.keys())
-
-def split_key(key: str):
-    name = key.split(".")[1]
-    return name
+target_keys = list(target_buttons.keys())
 
 def get_key_from_stupid_map(key):
     keys = list(buttons.values())
@@ -64,16 +67,25 @@ def hotkey_callback():
 
     # set key
     config["key"] = key_code
-                                          
+                                           
     gui.set_value("current_key", f"current key: {key}")
 
 def cps_callback():
     value = gui.get_value("cps")
     config["cps"] = value
 
+def target_key_callback():
+    target = gui.get_value("target_key")
+    config["target"] = target
+    gui.set_value("current_target", f"current target: {target}")
+
 def click():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+    target_event = target_buttons[config["target"]]
+    win32api.mouse_event(target_event, 0, 0)
+    if config["target"] == "mouse1":
+        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+    elif config["target"] == "mouse2":
+        win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0)
 
 def yep():
     global app
@@ -105,14 +117,14 @@ def initialize():
     app["thread"].start()
 
 gui.create_context()
-gui.create_viewport(title="elterpy", width=600, height=350, min_width=600, max_height=350, resizable=False)
+gui.create_viewport(title="elterpy", width=600, height=400, min_width=600, max_height=400, resizable=False)
 gui.setup_dearpygui()
 gui.set_exit_callback(yep)
 
 with gui.font_registry():
     main_font = gui.add_font(file="./fonts/jb.ttf", size=16)
 
-with gui.window(label="elterpy", max_size=(600, 350), min_size=(600, 350), no_resize=True, no_title_bar=True, no_move=True):
+with gui.window(label="elterpy", max_size=(600, 400), min_size=(600, 400), no_resize=True, no_title_bar=True, no_move=True):
     
     with gui.tab_bar():
 
@@ -128,6 +140,11 @@ with gui.window(label="elterpy", max_size=(600, 350), min_size=(600, 350), no_re
             gui.add_listbox(hotkeys, label="hotkeys", callback=hotkey_callback, tag="keys", tracked=True, num_items=len(hotkeys) * 2)
             current_key = get_key_from_stupid_map(config.get("key"))
             gui.add_text(f"current key: { current_key }", tag="current_key")
+
+        # target key tab
+        with gui.tab(label="target key"):
+            gui.add_listbox(target_keys, label="target key", callback=target_key_callback, tag="target_key", tracked=True, num_items=len(target_keys))
+            gui.add_text(f"current target: {config.get('target')}", tag="current_target")
 
         # config tab
         with gui.tab(label="config"):
