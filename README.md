@@ -1,7 +1,7 @@
 <h1 align="center" style="padding: 25px; margin-bottom: 10px;">elter-click</h1>
 
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/1113598730734665859/1212547633281765416/image.png?ex=65f23bfb&is=65dfc6fb&hm=8556d881a59b5e9fb2b126dd3fdc50f5d9277c4980dc7fe362a0144c492d8cd3&" width="600" style="margin-top: 20px;">
+    <img src="https://steamuserimages-a.akamaihd.net/ugc/2474257527210946472/CFA52BF37D9B0EC7A8C1B9305B533278F49BD872/?imw=378&imh=506&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" width="600" style="margin-top: 20px;">
 </p>
 
 <p align="center" style="font-family: Arial; font-size: 22px; font-weight: bold;">auto click</p>
